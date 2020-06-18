@@ -23,7 +23,7 @@ const PercentInput = ({
         ...InputProps,
         startAdornment: readOnly 
           ? <InputAdornment position="start">=</InputAdornment> 
-          : <InputAdornment position="start"><IconButton><EditIcon /></IconButton></InputAdornment>,
+          : <InputAdornment position="start"><EditIcon fontSize="small" /></InputAdornment>,
         endAdornment: <InputAdornment position="end">%</InputAdornment>,
       }}
       inputProps={{
