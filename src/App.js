@@ -13,12 +13,11 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, withStyles, createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import NumberFormat from 'react-number-format';
 
-
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   typography: {
     h1: {
       color: '#d82b2b',
@@ -38,12 +37,11 @@ const theme = createMuiTheme({
     },
     body1: {
       color: "#224d6b",
-    },
-    button: {
-      fontStyle: 'italic',
+      fontSize: "1.0rem",
     },
   },
 });
+theme = responsiveFontSizes(theme);
 
 const useStyles = makeStyles((theme) => ({
   paper: {
