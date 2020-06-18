@@ -469,7 +469,7 @@ function App() {
                 https://github.com/v-dogg/yrittajanelakesijoitus 
               </Link>
               <span style={{color: '#aaa', fontSize: 10 }}>
-                {' ('} { process.env.REACT_APP_GIT_HASH } {')'}
+                {' ('} { process.env.REACT_APP_GIT_HASH.substring(0, 7) } {')'}
               </span>
             </Grid>
           </Grid>
