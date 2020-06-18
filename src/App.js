@@ -470,6 +470,9 @@ function App() {
               <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
                 https://github.com/v-dogg/yrittajanelakesijoitus 
               </Link>
+              <span style={{color: '#aaa', fontSize: 10 }}>
+                {' ('} { process.env.REACT_APP_GIT_HASH } {')'}
+              </span>
             </Grid>
           </Grid>
         </Box>
