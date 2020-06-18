@@ -35,7 +35,7 @@ const theme = createMuiTheme({
     h3: {
       color: '#224d6b',
       fontSize: "1.3rem",
-      fontWeight: 300,  
+      fontWeight: 300,
     },
     body1: {
       color: "#224d6b",
@@ -116,19 +116,19 @@ function App() {
     let rate = result.netYield1/100;
     let factor = (Math.pow((1+rate), result.years) - 1) / rate;
     result.futureValue1 = Math.round( (result.toInvest1 * factor) * (1+rate) )
-    
+
     rate = result.netYield2/100;
     factor = (Math.pow((1+rate), result.years) - 1) / rate;
     result.futureValue2 = Math.round( (result.toInvest2 * factor) * (1+rate) );
 
-    // taxable portions 
+    // taxable portions
     result.taxable1 = result.futureValue1;
     result.taxable2 = result.futureValue2 - result.capital2;
 
     // net values after taxes
     result.net1 = Math.round(result.taxable1 * (1-(result.tax1/100)));
     result.net2 = Math.round(result.capital1 + result.taxable2 * (1-(result.tax2/100)));
-    
+
     //console.log(result)
     return result;
   }
@@ -167,7 +167,7 @@ function App() {
                 name="toInvest1"
                 value={state.toInvest1}
                 onChange={handleChange}
-              />  
+              />
             </Grid>
           </Grid>
           <Typography>
@@ -181,7 +181,7 @@ function App() {
                 name="corporateTaxRate"
                 value={state.corporateTaxRate}
                 onChange={handleChange}
-                />  
+                />
             </Grid>
             <Grid item sm={12}>
               <PercentInput
@@ -190,16 +190,16 @@ function App() {
                 name="dividendTaxRate"
                 value={state.dividendTaxRate}
                 onChange={handleChange}
-              />  
+              />
             </Grid>
-            <Grid item sm={12}> 
+            <Grid item sm={12}>
               <EuroInput
                 label="Osinko"
                 helperText="Yrittäjälle käteen jäävä osinko sijoitettavaksi henkilökohtaiseen sijoitukseen"
                 name="toInvest2"
                 value={state.toInvest2}
                 readOnly={true}
-              />  
+              />
             </Grid>
           </Grid>
         </Paper1>
@@ -216,13 +216,13 @@ function App() {
                 name="grossYield"
                 value={state.grossYield}
                 onChange={handleChange}
-                />  
+                />
             </Grid>
 
             <Grid item xs={6}>
               <Typography variant="h3" className={classes.h3}>
                 Yritys sijoittaa eläkevakuutukseen
-              </Typography>            
+              </Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography variant="h3" className={classes.h3}>
@@ -236,7 +236,7 @@ function App() {
                 name="mgmtFee1"
                 value={state.mgmtFee1}
                 onChange={handleChange}
-                />  
+                />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -245,7 +245,7 @@ function App() {
                 name="mgmtFee2"
                 value={state.mgmtFee2}
                 onChange={handleChange}
-                />  
+                />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -254,7 +254,7 @@ function App() {
                 name="netYield1"
                 value={state.netYield1}
                 readOnly
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -291,22 +291,22 @@ function App() {
                     ),
                   }}
                   inputProps={{
-                    step: 1, 
-                    min: 1, 
+                    step: 1,
+                    min: 1,
                     max: 100,
                     style: {
                       textAlign: 'right',
                     },
                   }}
                   FormHelperTextProps={{ style: { textAlign: 'right' } }}
-                />  
+                />
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body" >
                 Vuosittainen sijoitus eläkevakuutukseen: <br/>
                 <NumberFormat value={state.toInvest1} displayType="text" thousandSeparator=" " suffix=' €'/>
               </Typography>
-              
+
             </Grid>
             <Grid item xs={6}>
             <Typography variant="body" >
@@ -321,7 +321,7 @@ function App() {
                 name="capital1"
                 value={state.capital1}
                 readOnly
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <EuroInput
@@ -330,7 +330,7 @@ function App() {
                 name="capital2"
                 value={state.capital2}
                 readOnly
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <EuroInput
@@ -348,7 +348,7 @@ function App() {
                 name="futureValue2"
                 value={state.futureValue2}
                 readOnly
-              /> 
+              />
             </Grid>
             <Grid item xs={6}>
               <EuroInput
@@ -357,7 +357,7 @@ function App() {
                 name="taxable1"
                 value={state.taxable1}
                 readOnly
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <EuroInput
@@ -366,7 +366,7 @@ function App() {
                 name="taxable2"
                 value={state.taxable2}
                 readOnly
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -375,7 +375,7 @@ function App() {
                 name="tax1"
                 value={state.tax1}
                 onChange={handleChange}
-              />  
+              />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -384,7 +384,7 @@ function App() {
                 name="tax2"
                 value={state.tax2}
                 onChange={handleChange}
-              />  
+              />
             </Grid>
 
             <Grid item xs={12}>
@@ -418,10 +418,10 @@ function App() {
             Disclaimer
           </Typography>
           <Typography>
-            Tämä laskuri: 
+            Tämä laskuri:
             <ol>
               <li>ole kannanotto minkään sijoitus- tai säästämismuodon puolesta</li>
-              <li>on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon henkilökohtaisten 
+              <li>on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon henkilökohtaisten
                 rahastojen voittojen verokohtelua, jos niillä tehdään kauppaa säästämisaikana.</li>
             </ol>
             </Typography>

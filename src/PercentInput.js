@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit';
 
 const PercentInput = ({
@@ -11,7 +10,7 @@ const PercentInput = ({
   InputProps = {},
   ...props
 }) => {
-  
+
   return (
     <TextField
       margin="normal"
@@ -21,14 +20,14 @@ const PercentInput = ({
       InputLabelProps={{ shrink: true }}
       InputProps={{
         ...InputProps,
-        startAdornment: readOnly 
-          ? <InputAdornment position="start">=</InputAdornment> 
+        startAdornment: readOnly
+          ? <InputAdornment position="start">=</InputAdornment>
           : <InputAdornment position="start"><EditIcon fontSize="small" /></InputAdornment>,
         endAdornment: <InputAdornment position="end">%</InputAdornment>,
       }}
       inputProps={{
-        step: 1, 
-        min: 0, 
+        step: 1,
+        min: 0,
         max: 100,
         readOnly: readOnly,
         style: {
