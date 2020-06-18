@@ -126,7 +126,7 @@ function App() {
 
     // net values after taxes
     result.net1 = Math.round(result.taxable1 * (1-(result.tax1/100)));
-    result.net2 = Math.round(result.capital1 + result.taxable2 * (1-(result.tax2/100)));
+    result.net2 = Math.round(result.capital2 + result.taxable2 * (1-(result.tax2/100)));
 
     //console.log(result)
     return result;
@@ -419,13 +419,13 @@ function App() {
           <Typography>
             Tämä laskuri:
             <ol>
-              <li>ole kannanotto minkään sijoitus- tai säästämismuodon puolesta</li>
+              <li>ei ole kannanotto minkään sijoitus- tai säästämismuodon puolesta</li>
               <li>on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon henkilökohtaisten
                 rahastojen voittojen verokohtelua, jos niillä tehdään kauppaa säästämisaikana.</li>
             </ol>
             </Typography>
             <Typography>
-              Valitessasi eläkesäästämisen muotoa, pohdi ainakin seuraavia asioita:
+              Valitessasi eläkesäästämisen muotoa, pohdi omalta kannaltasi ainakin seuraavia asioita:
               <ul>
                 <li>Verotus: varojen verokohtelu ja vähennysoikeudet
                   <ol>
@@ -451,24 +451,24 @@ function App() {
             </Grid>
             <Grid container alignItems="center" justify="center" spacing={1} >
               <Grid item>
-                <Link href="https://www.linkedin.com/in/vmakinen/">
+                <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank" >
                   <LinkedInIcon fontSize="small" />
                 </Link>
               </Grid>
               <Grid item>
-                <Link  href="https://www.linkedin.com/in/vmakinen/">
+                <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank">
                   https://www.linkedin.com/in/vmakinen/
                 </Link>
               </Grid>
             </Grid>
             <Grid container alignItems="center" justify="center" spacing={1} >
               <Grid item>
-                <Link href="https://github.com/v-dogg/yrittajanelakesijoitus">
+                <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
                   <GitHubIcon fontSize="small" />
                 </Link>
               </Grid>
               <Grid item>
-                <Link  href="https://github.com/v-dogg/yrittajanelakesijoitus">
+                <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
                   https://github.com/v-dogg/yrittajanelakesijoitus
                 </Link>
               </Grid>
