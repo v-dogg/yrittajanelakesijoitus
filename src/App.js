@@ -75,7 +75,7 @@ function App() {
   const initialState = {
     toInvest1: 3600,
     corporateTaxRate: 20,
-    dividendTaxRate: 7.5,
+    dividendTaxRate: 15,
     toInvest2: 0, //net dividend
     years: 25,
     grossYield: 7,
@@ -183,7 +183,7 @@ function App() {
             <Grid item sm={12}>
               <PercentInput
                 label="Osinkovero"
-                helperText=""
+                helperText="Arvio osinkoverosta (riippuu yrityksen nettovarallisuudesta ja yrittäjän ansiotuloveroprosentista)"
                 name="dividendTaxRate"
                 value={state.dividendTaxRate}
                 onChange={handleChange}
