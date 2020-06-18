@@ -301,14 +301,14 @@ function App() {
                 />
             </Grid>
             <Grid item xs={6}>
-              <Typography variant="body" >
+              <Typography>
                 Vuosittainen sijoitus eläkevakuutukseen: <br/>
                 <NumberFormat value={state.toInvest1} displayType="text" thousandSeparator=" " suffix=' €'/>
               </Typography>
 
             </Grid>
             <Grid item xs={6}>
-            <Typography variant="body" >
+            <Typography>
                 Vuosittainen sijoitus rahastoihin: <br/>
                 <NumberFormat value={state.toInvest2} displayType="text" thousandSeparator=" " suffix=' €'/>
               </Typography>
@@ -416,15 +416,15 @@ function App() {
           <Typography variant="h2" >
             Disclaimer
           </Typography>
-          <Typography>
+          <div>
             Tämä laskuri:
             <ol>
               <li>ei ole kannanotto minkään sijoitus- tai säästämismuodon puolesta</li>
               <li>on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon henkilökohtaisten
                 rahastojen voittojen verokohtelua, jos niillä tehdään kauppaa säästämisaikana.</li>
             </ol>
-            </Typography>
-            <Typography>
+            </div>
+            <div>
               Valitessasi eläkesäästämisen muotoa, pohdi omalta kannaltasi ainakin seuraavia asioita:
               <ul>
                 <li>Verotus: varojen verokohtelu ja vähennysoikeudet
@@ -436,44 +436,42 @@ function App() {
                 <li>Kulut: eri sijoitusmuotojen kuluissa on eroja ja pitkällä aikavälillä pienetkin erot saattavat olla merkittäviä</li>
                 <li>Tilanteen muuttuminen ennen eläkeikää (millä ehdoilla voit nostaa eläkesäästöjä ennen eläkeikää)</li>
               </ul>
-            </Typography>
+            </div>
         </Box>
 
         <Box mt={8} mb={9} >
-          <Typography variant="body2" align="center" color={'#f00'} >
-            <Grid container alignItems="center" justify="center" spacing={1} >
-              <Grid item>
-                  <CopyrightIcon fontSize="small" />
-              </Grid>
-              <Grid item>
-                Veikko Mäkinen
-              </Grid>
+          <Grid container alignItems="center" justify="center" spacing={1} >
+            <Grid item>
+                <CopyrightIcon fontSize="small" />
             </Grid>
-            <Grid container alignItems="center" justify="center" spacing={1} >
-              <Grid item>
-                <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank" >
-                  <LinkedInIcon fontSize="small" />
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank">
-                  https://www.linkedin.com/in/vmakinen/
-                </Link>
-              </Grid>
+            <Grid item>
+              Veikko Mäkinen
             </Grid>
-            <Grid container alignItems="center" justify="center" spacing={1} >
-              <Grid item>
-                <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
-                  <GitHubIcon fontSize="small" />
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
-                  https://github.com/v-dogg/yrittajanelakesijoitus
-                </Link>
-              </Grid>
+          </Grid>
+          <Grid container alignItems="center" justify="center" spacing={1} >
+            <Grid item>
+              <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank" >
+                <LinkedInIcon fontSize="small" />
+              </Link>
             </Grid>
-          </Typography>
+            <Grid item>
+              <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank">
+                https://www.linkedin.com/in/vmakinen/
+              </Link>
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" justify="center" spacing={1} >
+            <Grid item>
+              <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
+                <GitHubIcon fontSize="small" />
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
+                https://github.com/v-dogg/yrittajanelakesijoitus 
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
 
       </Container>
