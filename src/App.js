@@ -435,6 +435,10 @@ function App() {
                 <li>Tilanteen muuttuminen ennen eläkeikää (millä ehdoilla voit nostaa eläkesäästöjä ennen eläkeikää)</li>
               </ul>
             </div>
+            <div>
+              Eläkesäästäminen ei korvaa YEL-vakuutuksen (mahdollisesti vapaaehtoisilla vakuutuksilla täydennettynä) 
+              tuomaa sosiaaliturvaa esim. sairauden tai työkyvyttömyyden varalle. 
+            </div>
         </Box>
 
         <Box mt={8} mb={9} >
