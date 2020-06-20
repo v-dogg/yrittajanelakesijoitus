@@ -5,7 +5,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import EditIcon from '@material-ui/icons/Edit';
 import NumberFormat from 'react-number-format';
 
-
 function EuroNumberFormat(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -21,7 +20,7 @@ function EuroNumberFormat(props) {
           },
         });
       }}
-      thousandSeparator=' '
+      thousandSeparator=" "
       isNumericString
     />
   );
@@ -40,7 +39,6 @@ const EuroInput = ({
   InputProps = {},
   ...props
 }) => {
-
   return (
     <TextField
       margin="normal"
@@ -49,15 +47,19 @@ const EuroInput = ({
       InputLabelProps={{ shrink: true }}
       InputProps={{
         ...InputProps,
-        startAdornment: readOnly
-          ? <InputAdornment position="start">=</InputAdornment>
-          : <InputAdornment position="start"><EditIcon fontSize="small" /></InputAdornment>,
-        endAdornment: <InputAdornment position="end">€</InputAdornment> ,
-        inputComponent: EuroNumberFormat
+        startAdornment: readOnly ? (
+          <InputAdornment position="start">=</InputAdornment>
+        ) : (
+          <InputAdornment position="start">
+            <EditIcon fontSize="small" />
+          </InputAdornment>
+        ),
+        endAdornment: <InputAdornment position="end">€</InputAdornment>,
+        inputComponent: EuroNumberFormat,
       }}
       inputProps={{
         ...inputProps,
-        readOnly: readOnly,
+        readOnly,
         style: {
           textAlign: 'right',
         },

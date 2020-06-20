@@ -1,8 +1,6 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import EuroInput from './EuroInput'
-import PercentInput from './PercentInput'
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import EditIcon from '@material-ui/icons/Edit';
@@ -13,42 +11,51 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles, createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  withStyles,
+  createMuiTheme,
+  ThemeProvider,
+  responsiveFontSizes,
+} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import NumberFormat from 'react-number-format';
+import EuroInput from './EuroInput';
+import PercentInput from './PercentInput';
 
 let theme = createMuiTheme({
   typography: {
     h1: {
       color: '#d82b2b',
-      fontSize: "2.5rem",
+      fontSize: '2.5rem',
       marginTop: 20,
       marginBottom: 20,
     },
     h2: {
       color: '#224d6b',
-      fontSize: "1.7rem",
+      fontSize: '1.7rem',
       marginBottom: 20,
     },
     h3: {
       color: '#224d6b',
-      fontSize: "1.3rem",
+      fontSize: '1.3rem',
       fontWeight: 300,
     },
     body1: {
-      color: "#224d6b",
-      fontSize: "1.0rem",
+      color: '#224d6b',
+      fontSize: '1.0rem',
     },
   },
 });
+
 theme = responsiveFontSizes(theme);
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((th) => ({
   paper: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(2),
-  }
+    marginTop: th.spacing(2),
+    marginBottom: th.spacing(2),
+    padding: th.spacing(2),
+  },
 }));
 
 const Paper1 = withStyles({
@@ -76,7 +83,7 @@ function App() {
     toInvest1: 3600,
     corporateTaxRate: 20,
     dividendTaxRate: 15,
-    toInvest2: 0, //net dividend
+    toInvest2: 0, // net dividend
     years: 25,
     grossYield: 7,
     mgmtFee1: 2.5,
@@ -93,42 +100,46 @@ function App() {
     tax2: 30,
     net1: 0,
     net2: 0,
-  }
+  };
 
   const calculate = (data) => {
     const result = { ...data };
 
-    const corporateTax = result.corporateTaxRate/100
-    const dividendTax = result.dividendTaxRate/100
+    const corporateTax = result.corporateTaxRate / 100;
+    const dividendTax = result.dividendTaxRate / 100;
 
-    result.toInvest2 = Math.round(result.toInvest1 * (1-corporateTax) * (1-dividendTax));
+    result.toInvest2 = Math.round(
+      result.toInvest1 * (1 - corporateTax) * (1 - dividendTax)
+    );
 
     result.netYield1 = result.grossYield - result.mgmtFee1;
     result.netYield2 = result.grossYield - result.mgmtFee2;
 
-    result.capital1 =  result.toInvest1 * result.years;
-    result.capital2 =  result.toInvest2 * result.years;
+    result.capital1 = result.toInvest1 * result.years;
+    result.capital2 = result.toInvest2 * result.years;
 
-    //future value of an annuity for both scenarios
-    let rate = result.netYield1/100;
-    let factor = (Math.pow((1+rate), result.years) - 1) / rate;
-    result.futureValue1 = Math.round( (result.toInvest1 * factor) * (1+rate) )
+    // future value of an annuity for both scenarios
+    let rate = result.netYield1 / 100;
+    let factor = ((1 + rate) ** result.years - 1) / rate;
+    result.futureValue1 = Math.round(result.toInvest1 * factor * (1 + rate));
 
-    rate = result.netYield2/100;
-    factor = (Math.pow((1+rate), result.years) - 1) / rate;
-    result.futureValue2 = Math.round( (result.toInvest2 * factor) * (1+rate) );
+    rate = result.netYield2 / 100;
+    factor = ((1 + rate) ** result.years - 1) / rate;
+    result.futureValue2 = Math.round(result.toInvest2 * factor * (1 + rate));
 
     // taxable portions
     result.taxable1 = result.futureValue1;
     result.taxable2 = result.futureValue2 - result.capital2;
 
     // net values after taxes
-    result.net1 = Math.round(result.taxable1 * (1-(result.tax1/100)));
-    result.net2 = Math.round(result.capital2 + result.taxable2 * (1-(result.tax2/100)));
+    result.net1 = Math.round(result.taxable1 * (1 - result.tax1 / 100));
+    result.net2 = Math.round(
+      result.capital2 + result.taxable2 * (1 - result.tax2 / 100)
+    );
 
-    //console.log(result)
+    // console.log(result)
     return result;
-  }
+  };
 
   const [state, setState] = React.useState(calculate(initialState));
 
@@ -140,23 +151,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="sm" >
+      <Container component="main" maxWidth="sm">
         <CssBaseline />
 
         <Box mt={6} mb={4}>
-          <Typography variant="h1">
-            Yrittäjän eläkesijoitusvertailu
-          </Typography>
+          <Typography variant="h1">Yrittäjän eläkesijoitusvertailu</Typography>
         </Box>
 
         <Paper1 className={classes.paper}>
-          <Typography variant="h2">
-            Vuosittain säästettävä summa
-          </Typography>
-          <Typography>
-            Yrityksen maksama summa eläkevakuutukseen
-          </Typography>
-          <Grid container spacing={2} >
+          <Typography variant="h2">Vuosittain säästettävä summa</Typography>
+          <Typography>Yrityksen maksama summa eläkevakuutukseen</Typography>
+          <Grid container spacing={2}>
             <Grid item sm={12}>
               <EuroInput
                 label="Sijoitettava summa"
@@ -167,10 +172,8 @@ function App() {
               />
             </Grid>
           </Grid>
-          <Typography>
-            Jos sama summa nostetaan osinkona
-          </Typography>
-          <Grid container spacing={2} >
+          <Typography>Jos sama summa nostetaan osinkona</Typography>
+          <Grid container spacing={2}>
             <Grid item sm={12}>
               <PercentInput
                 label="Yhteisövero"
@@ -178,7 +181,7 @@ function App() {
                 name="corporateTaxRate"
                 value={state.corporateTaxRate}
                 onChange={handleChange}
-                />
+              />
             </Grid>
             <Grid item sm={12}>
               <PercentInput
@@ -195,7 +198,7 @@ function App() {
                 helperText="Yrittäjälle käteen jäävä osinko sijoitettavaksi henkilökohtaiseen sijoitukseen"
                 name="toInvest2"
                 value={state.toInvest2}
-                readOnly={true}
+                readOnly
               />
             </Grid>
           </Grid>
@@ -213,7 +216,7 @@ function App() {
                 name="grossYield"
                 value={state.grossYield}
                 onChange={handleChange}
-                />
+              />
             </Grid>
 
             <Grid item xs={6}>
@@ -233,7 +236,7 @@ function App() {
                 name="mgmtFee1"
                 value={state.mgmtFee1}
                 onChange={handleChange}
-                />
+              />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -242,7 +245,7 @@ function App() {
                 name="mgmtFee2"
                 value={state.mgmtFee2}
                 onChange={handleChange}
-                />
+              />
             </Grid>
             <Grid item xs={6}>
               <PercentInput
@@ -266,49 +269,60 @@ function App() {
         </Paper2>
 
         <Paper3 className={classes.paper}>
-          <Typography variant="h2">
-            Eläkesäästön arvo
-          </Typography>
+          <Typography variant="h2">Eläkesäästön arvo</Typography>
 
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                  type="number"
-                  fullWidth
-                  variant="outlined"
-                  label="Sijoitusaika"
-                  helperText=""
-                  name="years"
-                  value={state.years}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start"><EditIcon fontSize="small" /></InputAdornment>,
-                    endAdornment: (
-                      <InputAdornment position="end">v</InputAdornment>
-                    ),
-                  }}
-                  inputProps={{
-                    step: 1,
-                    min: 1,
-                    max: 100,
-                    style: {
-                      textAlign: 'right',
-                    },
-                  }}
-                  FormHelperTextProps={{ style: { textAlign: 'right' } }}
-                />
+                type="number"
+                fullWidth
+                variant="outlined"
+                label="Sijoitusaika"
+                helperText=""
+                name="years"
+                value={state.years}
+                onChange={handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EditIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">v</InputAdornment>
+                  ),
+                }}
+                inputProps={{
+                  step: 1,
+                  min: 1,
+                  max: 100,
+                  style: {
+                    textAlign: 'right',
+                  },
+                }}
+                FormHelperTextProps={{ style: { textAlign: 'right' } }}
+              />
             </Grid>
             <Grid item xs={6}>
               <Typography>
-                Vuosittainen sijoitus eläkevakuutukseen: <br/>
-                <NumberFormat value={state.toInvest1} displayType="text" thousandSeparator=" " suffix=' €'/>
+                Vuosittainen sijoitus eläkevakuutukseen: <br />
+                <NumberFormat
+                  value={state.toInvest1}
+                  displayType="text"
+                  thousandSeparator=" "
+                  suffix=" €"
+                />
               </Typography>
-
             </Grid>
             <Grid item xs={6}>
-            <Typography>
-                Vuosittainen sijoitus rahastoihin: <br/>
-                <NumberFormat value={state.toInvest2} displayType="text" thousandSeparator=" " suffix=' €'/>
+              <Typography>
+                Vuosittainen sijoitus rahastoihin: <br />
+                <NumberFormat
+                  value={state.toInvest2}
+                  displayType="text"
+                  thousandSeparator=" "
+                  suffix=" €"
+                />
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -399,7 +413,7 @@ function App() {
               />
             </Grid>
             <Grid item xs={6}>
-            <EuroInput
+              <EuroInput
                 label="Netto"
                 helperText=""
                 name="net1"
@@ -411,74 +425,99 @@ function App() {
         </Paper3>
 
         <Box mt={8} mb={9}>
-          <Typography variant="h2" >
-            Disclaimer
-          </Typography>
+          <Typography variant="h2">Disclaimer</Typography>
           <div>
             Tämä laskuri:
             <ol>
-              <li>ei ole kannanotto minkään sijoitus- tai säästämismuodon puolesta</li>
-              <li>on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon henkilökohtaisten
-                rahastojen voittojen verokohtelua, jos niillä tehdään kauppaa säästämisaikana.</li>
+              <li>
+                ei ole kannanotto minkään sijoitus- tai säästämismuodon puolesta
+              </li>
+              <li>
+                on yksinkertaistettu monella tapaa. Se mm. ei ota huomioon
+                henkilökohtaisten rahastojen voittojen verokohtelua, jos niillä
+                tehdään kauppaa säästämisaikana.
+              </li>
             </ol>
-            </div>
-            <div>
-              Valitessasi eläkesäästämisen muotoa, pohdi omalta kannaltasi ainakin seuraavia asioita:
-              <ul>
-                <li>Verotus: varojen verokohtelu ja vähennysoikeudet
-                  <ol>
-                    <li>sijoitushetkellä</li>
-                    <li>säästämisaikana (myyntien verotus ja tappioiden vähennysoikeus)</li>
-                    <li>eläkettä nostettaessa</li>
-                  </ol></li>
-                <li>Kulut: eri sijoitusmuotojen kuluissa on eroja ja pitkällä aikavälillä pienetkin erot saattavat olla merkittäviä</li>
-                <li>Tilanteen muuttuminen ennen eläkeikää (millä ehdoilla voit nostaa eläkesäästöjä ennen eläkeikää)</li>
-              </ul>
-            </div>
-            <div>
-              Eläkesäästäminen ei korvaa YEL-vakuutuksen (mahdollisesti vapaaehtoisilla vakuutuksilla täydennettynä) 
-              tuomaa sosiaaliturvaa esim. sairauden tai työkyvyttömyyden varalle. 
-            </div>
+          </div>
+          <div>
+            Valitessasi eläkesäästämisen muotoa, pohdi omalta kannaltasi ainakin
+            seuraavia asioita:
+            <ul>
+              <li>
+                Verotus: varojen verokohtelu ja vähennysoikeudet
+                <ol>
+                  <li>sijoitushetkellä</li>
+                  <li>
+                    säästämisaikana (myyntien verotus ja tappioiden
+                    vähennysoikeus)
+                  </li>
+                  <li>eläkettä nostettaessa</li>
+                </ol>
+              </li>
+              <li>
+                Kulut: eri sijoitusmuotojen kuluissa on eroja ja pitkällä
+                aikavälillä pienetkin erot saattavat olla merkittäviä
+              </li>
+              <li>
+                Tilanteen muuttuminen ennen eläkeikää (millä ehdoilla voit
+                nostaa eläkesäästöjä ennen eläkeikää)
+              </li>
+            </ul>
+          </div>
+          <div>
+            Eläkesäästäminen ei korvaa YEL-vakuutuksen (mahdollisesti
+            vapaaehtoisilla vakuutuksilla täydennettynä) tuomaa sosiaaliturvaa
+            esim. sairauden tai työkyvyttömyyden varalle.
+          </div>
         </Box>
 
-        <Box mt={8} mb={9} >
-          <Grid container alignItems="center" justify="center" spacing={1} >
+        <Box mt={8} mb={9}>
+          <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
-                <CopyrightIcon fontSize="small" />
+              <CopyrightIcon fontSize="small" />
             </Grid>
-            <Grid item>
-              Veikko Mäkinen
-            </Grid>
+            <Grid item>Veikko Mäkinen</Grid>
           </Grid>
-          <Grid container alignItems="center" justify="center" spacing={1} >
+          <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
-              <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank" >
+              <Link
+                href="https://www.linkedin.com/in/vmakinen/"
+                target="_blank"
+              >
                 <LinkedInIcon fontSize="small" />
               </Link>
             </Grid>
             <Grid item>
-              <Link href="https://www.linkedin.com/in/vmakinen/" target="_blank">
+              <Link
+                href="https://www.linkedin.com/in/vmakinen/"
+                target="_blank"
+              >
                 https://www.linkedin.com/in/vmakinen/
               </Link>
             </Grid>
           </Grid>
-          <Grid container alignItems="center" justify="center" spacing={1} >
+          <Grid container alignItems="center" justify="center" spacing={1}>
             <Grid item>
-              <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
+              <Link
+                href="https://github.com/v-dogg/yrittajanelakesijoitus"
+                target="_blank"
+              >
                 <GitHubIcon fontSize="small" />
               </Link>
             </Grid>
             <Grid item>
-              <Link href="https://github.com/v-dogg/yrittajanelakesijoitus" target="_blank">
-                https://github.com/v-dogg/yrittajanelakesijoitus 
+              <Link
+                href="https://github.com/v-dogg/yrittajanelakesijoitus"
+                target="_blank"
+              >
+                https://github.com/v-dogg/yrittajanelakesijoitus
               </Link>
-              <span style={{color: '#aaa', fontSize: 10 }}>
-                {' ('} { process.env.REACT_APP_GIT_HASH.substring(0, 7) } {')'}
+              <span style={{ color: '#aaa', fontSize: 10 }}>
+                {' ('} {process.env.REACT_APP_GIT_HASH.substring(0, 7)} {')'}
               </span>
             </Grid>
           </Grid>
         </Box>
-
       </Container>
     </ThemeProvider>
   );

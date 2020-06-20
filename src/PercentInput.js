@@ -6,11 +6,9 @@ import EditIcon from '@material-ui/icons/Edit';
 const PercentInput = ({
   variant = 'outlined',
   readOnly = false,
-  inputProps = {},
   InputProps = {},
   ...props
 }) => {
-
   return (
     <TextField
       margin="normal"
@@ -20,16 +18,20 @@ const PercentInput = ({
       InputLabelProps={{ shrink: true }}
       InputProps={{
         ...InputProps,
-        startAdornment: readOnly
-          ? <InputAdornment position="start">=</InputAdornment>
-          : <InputAdornment position="start"><EditIcon fontSize="small" /></InputAdornment>,
+        startAdornment: readOnly ? (
+          <InputAdornment position="start">=</InputAdornment>
+        ) : (
+          <InputAdornment position="start">
+            <EditIcon fontSize="small" />
+          </InputAdornment>
+        ),
         endAdornment: <InputAdornment position="end">%</InputAdornment>,
       }}
       inputProps={{
         step: 1,
         min: 0,
         max: 100,
-        readOnly: readOnly,
+        readOnly,
         style: {
           textAlign: 'right',
         },
